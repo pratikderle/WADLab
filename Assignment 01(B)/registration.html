@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Registration Page</title>
+
+    <script>
+        function registration() {
+            let email = document.getElementById("email").value;
+            let name = document.getElementById("name").value;
+            let pass = document.getElementById("password").value; 
+    
+            let userrecord = JSON.parse(localStorage.getItem("users")) || [];
+    
+            if(userrecord.some((v) => v.email === email)) 
+            {
+                alert("Duplicate Data Found");
+            } else 
+            {
+                userrecord.push({"email": email, "name": name, "pass": pass});
+                localStorage.setItem("users", JSON.stringify(userrecord));
+                alert("User Registration Successful");
+            }
+        }
+    </script>    
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2 class="text-center">Registration Form</h2>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Username:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-3 control-label">Password:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-primary" onclick="registration()">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
